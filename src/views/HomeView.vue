@@ -1,9 +1,10 @@
 <template>
   <div class="home">
     <div class="gradient" />
-    <video autoplay loop muted plays-inline class="head-item">
+    <video autoplay loop muted plays-inline class="head-item desktop">
       <source src="@/assets/video/background-polo.mp4" type="video/mp4" />
     </video>
+    <img class="head-item phone" src="@/assets/img/home.jpg" />
     <div class="text-front">
       <h3>casual style</h3>
     </div>
@@ -72,9 +73,19 @@ export default {
   margin: 20px auto;
   font-size: 1.5em;
 }
-
+.phone {
+  display: none;
+}
 #logo__home {
   max-width: 300px;
 }
 
+@media only screen and (max-width: 900px){
+  .desktop {
+    display: none;
+  }
+  .phone {
+    display: block;
+  }
+}
 </style>
