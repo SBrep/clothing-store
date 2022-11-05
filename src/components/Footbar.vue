@@ -1,9 +1,9 @@
 <template>
     <div class="foot">
         <div class="icons">
-            <a target="_blank" href="https://github.com/SBrep"><img src="../../public/instagram.png"/></a>
-            <a target="_blank" href="https://github.com/SBrep"><img src="../../public/facebook.png"/></a>
-            <a target="_blank" href="https://github.com/SBrep/"><img src="../../public/vkontakte.png"/></a>
+            <a target="_blank" href="https://github.com/SBrep"><img class="foot-icon" src="../../public/instagram.png"/></a>
+            <a target="_blank" href="https://github.com/SBrep"><img class="foot-icon" src="../../public/facebook.png"/></a>
+            <a target="_blank" href="https://github.com/SBrep/"><img class="foot-icon" src="../../public/vkontakte.png"/></a>
         </div>
         <div class="info-back">
             
@@ -35,5 +35,9 @@
     height: 0; 
     border-bottom: 100px solid rgba(10, 29, 78, 0.092);;
     border-right: 98vw solid transparent;
+}
+.foot-icon {
+    width: 22px;
+    height: 22px;
 }
 </style>

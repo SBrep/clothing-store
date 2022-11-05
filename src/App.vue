@@ -30,8 +30,8 @@ export default {
   top: 0;
   background: linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.2) 0%,
-    rgba(0, 0, 0, 0.2) 100%
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.1) 100%
   );
   pointer-events: none;
 }

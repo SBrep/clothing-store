@@ -21,10 +21,13 @@
             <img class="icon" src="@/assets/img/icons/search.png"/>
           </router-link>
         </div>
-        <div class="back-icon">
-          <img class="icon" src="@/assets/img/icons/cart.png" @click="toggleCart">
-          <span class="notification-counter">{{ cartItemCount }}</span>
-        </div>
+        
+        <router-link to="/checkout">
+          <div class="back-icon">
+            <img class="icon" src="@/assets/img/icons/cart.png" />
+            <span class="notification-counter">{{ cartItemCount }}</span>
+          </div>
+        </router-link>
       </div>
     </div>
   </template>
@@ -49,8 +52,8 @@ export default {
     updateScroll() {
       this.scrollPosition = window.scrollY;
     },
-    toggleCart() {
-      this.$emit("toggle");
+    openCart() {
+      this.$emit("open");
     },
   },
 };

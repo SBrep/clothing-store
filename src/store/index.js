@@ -43,7 +43,7 @@ export default createStore({
       {
         title: "Air force 1 low",
         src: require("@/assets/img/women/4.jpg"),
-        price: 1319.99,
+        price: 120,
         description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         type: "Top",
@@ -171,6 +171,25 @@ export default createStore({
     },
     getProductIdWomen: (state) => (id) => {
       return state.women.find((women) => women.id === parseInt(id));
+    },
+
+    getCart: (state) => state.cart,
+    cartItemCount: (state) => state.cart.length,
+
+    cartTotalPrice: (state) => {
+      let totalPrice = 0;
+      state.cart.forEach((item) => {
+        totalPrice += item.quantityPrice;
+      });
+      return totalPrice;
+    },
+    cartCheckoutPrice: (state) => {
+      let totalPrice = 0;
+      state.cart.forEach((item) => {
+        totalPrice += item.quantityPrice;
+      });
+      totalPrice += state.shipping;
+      return totalPrice;
     }
   },
   mutations: {
@@ -188,12 +207,48 @@ export default createStore({
           )
         })
       }
-    }
+    },
+    ADDING_TO_CART: (state, { product, quantity, size, quantityPrice }) => {
+      let productInCart = state.cart.find((item) => {
+        return item.product.id === product.id
+      });
+      if (productInCart && productInCart.size == size) {
+        productInCart.quantity += quantity;
+        productInCart.quantityPrice += productInCart.product.price;
+      }
+      else{
+        state.cart.unshift({ product, quantity, size, quantityPrice });
+      }
+    },
+
+    REMOVE_FROM_CART: (state, index) => {
+      state.cart[index].quantityPrice = state.cart[index].quantityPrice - state.cart[index].quantityPrice/state.cart[index].quantity
+      state.cart[index].quantity -= 1;
+      if (state.cart[index].quantity===0) {
+        state.cart.splice(index, 1)
+      }
+      
+    },
+
+    ORDER_SUCCESS(state) {
+      state.cart = [];
+    },
+
   },
   actions: {
     filterProducts({commit}, word) {
       commit("FILTERED_PRODUCTS", word);
+    },
+    addProductToCart: ({commit}, { product, quantity, size, quantityPrice }) => {
+      commit("ADDING_TO_CART", { product, quantity, size, quantityPrice });
+    },
+    removeProductFromCart: ({commit}, product) => {
+      commit("REMOVE_FROM_CART", product);
+    },
+    orderSuccess({ commit }) {
+      commit("ORDER_SUCCESS");
     }
+
   },
   modules: {
   }
